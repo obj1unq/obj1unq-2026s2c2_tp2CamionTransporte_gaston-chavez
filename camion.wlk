@@ -84,11 +84,7 @@ object camion {
 	}
 
 	method superaNivelPeligrosidadDeCarga(nivelPeligrosidad) {
-	  return self.nivelPeligrosidadDeCarga() > nivelPeligrosidad
-	}
-
-	method nivelPeligrosidadDeCarga() {
-	  return cosas.sum({unaCosa => unaCosa.nivelPeligrosidad()})
+  		return cosas.any({unaCosa => self.esMayorNivelPeligrosidad(unaCosa, nivelPeligrosidad)}) //ninguno de los objetos cargados supera el nivel máximo de peligrosidad indicado.
 	}
 
 	method tieneUnaCosaQuePesaEntre(minimo,maximo) {
@@ -96,7 +92,7 @@ object camion {
 	}
 
 	method pesaEntre(unaCosa,minimo,maximo) {
-	  return unaCosa.peso() > minimo && unaCosa.peso() < maximo
+	  return unaCosa.peso() >= minimo && unaCosa.peso() <= maximo
 	}
 
 	method cosaMasPesada() {
