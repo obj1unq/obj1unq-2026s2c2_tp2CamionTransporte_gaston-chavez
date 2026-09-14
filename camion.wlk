@@ -79,8 +79,8 @@ object camion {
 	  return self.cosasSuperanNivelPeligrosidad(otraCosa.nivelPeligrosidad())
 	}
 
-	method puedeCircularEnRuta(nivelPeligrosidad) {
-	  return not self.estaExcedidoDePeso() && not self.superaNivelPeligrosidadDeCarga(nivelPeligrosidad)
+	method puedeCircularEnRuta(nivelMaximoPeligrosidad) {
+	  return not self.estaExcedidoDePeso() && not self.superaNivelPeligrosidadDeCarga(nivelMaximoPeligrosidad)
 	}
 
 	method superaNivelPeligrosidadDeCarga(nivelPeligrosidad) {
@@ -100,7 +100,7 @@ object camion {
 	}
 
 	method cosaMasPesada() {
-	  self.validarSiHayCosas()//hace falta validar?
+	  self.validarSiHayCosas()
 	  return cosas.max({unaCosa => unaCosa.peso()}) //devuelve la cosa mas pesada entre las cosas
 	}
 
@@ -118,5 +118,51 @@ object camion {
 
 	method sufreAccidente() {
 	  cosas.forEach({unaCosa => unaCosa.efectoDeCarga()})
+	}
+
+	method vaciarCamion() {
+	  return cosas.clear()
+	}
+
+	method transportar(destino, camino) {
+	  self.validarSiPuedeTransitar(camino)
+	  destino.llegarAlmacen(self)
+	}
+
+	method validarSiPuedeTransitar(camino) {
+	  if (not camino.puedeTransitar(self)) {
+		self.error("no puede transitar en " + camino)
+	  }
+	}
+}
+
+object almacen {
+	const property contenido = #{}
+
+	method llegarAlmacen(vehiculo) {
+	  self.dejarCosasEnAlmacen(vehiculo)
+	}
+
+	method dejarCosasEnAlmacen(vehiculo) {
+	  contenido.addAll(vehiculo.cosas())
+	  vehiculo.vaciarCamion()
+	}
+}
+
+object ruta9 {
+  const nivelPeligrosidad = 20
+  method puedeTransitar(vehiculo) {
+	  return vehiculo.puedeCircularEnRuta(nivelPeligrosidad)
+	}
+}
+
+object caminosVecinales {
+	var pesoMaximo = 0
+	method puedeTransitar(vehiculo) {
+	  return vehiculo.pesoTotal() <= pesoMaximo
+	}
+
+	method pesoMaximo(_pesoMaximo) {
+	  pesoMaximo = _pesoMaximo
 	}
 }

@@ -6,7 +6,7 @@ object knightRider {
 	}
 
 	method efectoDeCarga() {
-	  
+	  // no tiene efecto de carga
 	}
 }
 
@@ -35,15 +35,17 @@ object arenaAGranel {
 }
 
 object bumblebee {
-  var property estaTransformadoEnAuto = true //cambiarlo a un objeto sea robot o auto
+  var modo = auto
   method peso() {
 	return 800
   }
 
-  method nivelPeligrosidad() { if (estaTransformadoEnAuto) return 15 else return 30 } //si esta transformado en auto, devuelve 15 de peligrosidad, en caso contrario 30
+  method nivelPeligrosidad() {
+	return modo.nivelPeligrosidad()
+  }
 
   method transformar() {
-	estaTransformadoEnAuto = not estaTransformadoEnAuto //si esta en modo auto, pasa a robot y viceversa.
+	modo = modo.transformar() //si esta en modo auto, pasa a robot y viceversa.
   }
 
   method bultos() {
@@ -51,7 +53,11 @@ object bumblebee {
 	}
 
 	method efectoDeCarga() {
-	  estaTransformadoEnAuto = false
+	  self.transformar()
+	}
+
+	method estaTransformadoEnAuto() {
+	  return modo.esAuto()
 	}
 }
 
@@ -86,14 +92,18 @@ object bateríaAntiaérea {
 	var tieneMisiles = true
 	method peso() { if (tieneMisiles) 300 else 200 } //si tiene misiles, devuelve 300 de peso, en caso contrario 200 de peso
 
-	method hayMisiles() {
-	  tieneMisiles = not tieneMisiles
-	}
-
 	method nivelPeligrosidad() { if(tieneMisiles) return 100 else return 0 } //si tiene misiles, devuelve 100 de peligrosidad, en caso contrario 0
 
 	method bultos() {
 	  if (tieneMisiles) return 2 else return 1
+	}
+
+	method cargar() {
+	  tieneMisiles = true
+	}
+
+	method descargar() {
+	  tieneMisiles = false 
 	}
 
 	method efectoDeCarga() {
@@ -180,15 +190,35 @@ object embalajeDeSeguridad {
 	}
 
 	method efectoDeCarga() {
-	  
+	  // no tiene efecto de carga
 	}
 }
 
 object auto {
+	method nivelPeligrosidad() {
+	  return 15
+	}
 
+	method esAuto() {
+		return true
+	}
+
+	method transformar() {
+	  return robot
+	}
 }
 
 object robot {
-	
+	method nivelPeligrosidad() {
+	  return 30
+	}
+
+	method esAuto() {
+		return false
+	}
+
+	method transformar() {
+	  return auto
+	}
 }
 
