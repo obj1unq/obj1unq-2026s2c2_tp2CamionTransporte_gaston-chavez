@@ -7,7 +7,7 @@ Link diagrama estatico (descargar la imagen para mejor visualizacion): https://i
 * Describir los polimorfismos asociados a las colecciones: 
 
    - ¿Qué nombre tiene el tipo de los objetos polimórficos?
-      -Los nombres que tienen los objetos polimorfismos, son: Cosa, Modo, Camino
+      -Los nombres que tienen los objetos polimorfismos, son: Cosa, Modo, Camino Y Estado
 
    - ¿Qué mensajes componen ese tipo?
       -El tipo "Cosa" compone los mensajes: peso(),nivelPeligrosidad(), bultos(), efectoDeCarga()
@@ -16,5 +16,9 @@ Link diagrama estatico (descargar la imagen para mejor visualizacion): https://i
       -El tipo "Estado" compone los mensajes: peso(), nivelPeligrosidad(), bultos(), cargar(), descargar()
 
    - ¿Qué objetos son los emisores de los mensajes polimórficos?
-      -Los objetos emisores son Camion, bumblebee Y bateriaAntiAerea
+      -Los objetos emisores:
+       -Camion es el emisor de tipo Cosa
+       -bumblebee es el emisor de tipo Modo
+       -bateriaAntiAerea es el emisor de tipo Estado
+       -contenedorPortuario es el emisor de tipo Cosa
 
