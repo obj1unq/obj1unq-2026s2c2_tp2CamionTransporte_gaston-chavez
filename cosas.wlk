@@ -91,29 +91,33 @@ object paqueteDeLadrillos {
 }
 
 object bateríaAntiaérea {
-	var tieneMisiles = true
-	method peso() { if (tieneMisiles) 300 else 200 } //si tiene misiles, devuelve 300 de peso, en caso contrario 200 de peso
+	var estado = cargada
+	method peso() {
+	  return estado.peso() //si esta cargada, devuelve 300 de peso, en caso contrario 200 de peso
+	}
 
-	method nivelPeligrosidad() { if(tieneMisiles) return 100 else return 0 } //si tiene misiles, devuelve 100 de peligrosidad, en caso contrario 0
+	method nivelPeligrosidad() {
+	  return estado.nivelPeligrosidad() //si esta cargada, devuelve 100 de peligrosidad, en caso contrario 0
+	}
 
 	method bultos() {
-	  if (tieneMisiles) return 2 else return 1
+	  return estado.bultos()
 	}
 
-	method cargar() {
-	  tieneMisiles = true
+	method cargarBateria() {
+	  estado = estado.cargar()
 	}
 
-	method descargar() {
-	  tieneMisiles = false 
+	method descargarBateria() {
+	  estado = estado.descargar()
 	}
 
 	method efectoDeCarga() {
-	  tieneMisiles = false
+	  self.descargarBateria()
 	}
 
-	method tieneMisiles() {
-	  return tieneMisiles
+	method estado() {
+	  return estado
 	}
 }
 
@@ -221,6 +225,51 @@ object robot {
 
 	method transformar() {
 	  return auto
+	}
+}
+
+object cargada {
+
+	method peso() {
+	  return 300
+	}
+
+	method nivelPeligrosidad() {
+	  return 100
+	}
+
+	method bultos() {
+	  return 2
+	}
+
+	method cargar() {
+	  return self
+	}
+
+	method descargar() {
+	  return descargada
+	}
+}
+
+object descargada {
+	method peso() {
+	  return 200
+	}
+
+	method nivelPeligrosidad() {
+	  return 0
+	}
+
+	method bultos() {
+	  return 1
+	}
+
+	method cargar() {
+	  return cargada
+	}
+
+	method descargar() {
+	  return self
 	}
 }
 
