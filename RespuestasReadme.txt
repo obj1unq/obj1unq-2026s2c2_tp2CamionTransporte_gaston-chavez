@@ -1,7 +1,7 @@
 ## 4 Reflexionar sobre los conceptos
 
 * Realizar un diagrama estático del sistema de objetos
-Link diagrama estatico (descargar la imagen para mejor visualizacion): https://imgur.com/a/TlRGUWB
+Link diagrama estatico (descargar la imagen para mejor visualizacion): https://imgur.com/a/c2GPYte
 
 
 * Describir los polimorfismos asociados a las colecciones: 

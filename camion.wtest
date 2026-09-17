@@ -190,7 +190,7 @@ describe "camionTransporte" {
 
         camion.sufreAccidente()
 
-        assert.notThat(bumblebee.estaTransformadoEnAuto())
+        assert.equals(robot, bumblebee.modo())
         assert.equals(30, residuosRadiactivos.peso())
         assert.equals(70, arenaAGranel.peso())
         assert.equals(88, paqueteDeLadrillos.cantLadrillos())
@@ -209,7 +209,7 @@ describe "camionTransporte" {
 
         camion.sufreAccidente()
 
-        assert.that(bumblebee.estaTransformadoEnAuto())
+        assert.equals(auto, bumblebee.modo())
         assert.equals(45, residuosRadiactivos.peso())
         assert.equals(0, paqueteDeLadrillos.peso())
         assert.equals(descargada, bateríaAntiaérea.estado())

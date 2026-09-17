@@ -52,15 +52,15 @@ object bumblebee {
 
   method bultos() {
 	  return 2
-	}
+  }
 
 	method efectoDeCarga() {
 	  self.transformar()
-	}
+  }
 
-	method estaTransformadoEnAuto() {
-	  return modo.esAuto()
-	}
+	method modo() {
+	  return modo
+  }
 }
 
 object paqueteDeLadrillos {
@@ -205,10 +205,6 @@ object auto {
 	  return 15
 	}
 
-	method esAuto() {
-		return true
-	}
-
 	method transformar() {
 	  return robot
 	}
@@ -217,10 +213,6 @@ object auto {
 object robot {
 	method nivelPeligrosidad() {
 	  return 30
-	}
-
-	method esAuto() {
-		return false
 	}
 
 	method transformar() {
