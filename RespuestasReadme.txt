@@ -1,7 +1,7 @@
 ## 4 Reflexionar sobre los conceptos
 
 * Realizar un diagrama estático del sistema de objetos
-Link diagrama estatico (descargar la imagen para mejor visualizacion): https://imgur.com/a/c2GPYte
+Link diagrama estatico (descargar la imagen para mejor visualizacion): https://imgur.com/a/KC8PoX0
 
 
 * Describir los polimorfismos asociados a las colecciones: 
@@ -11,9 +11,9 @@ Link diagrama estatico (descargar la imagen para mejor visualizacion): https://i
 
    - ¿Qué mensajes componen ese tipo?
       -El tipo "Cosa" compone los mensajes: peso(),nivelPeligrosidad(), bultos(), efectoDeCarga()
-      -El tipo "Modo" compone los mensajes: nivelPeligrosidad(), transformar(), esAuto()
+      -El tipo "Modo" compone los mensajes: nivelPeligrosidad(), transformar()
       -El tipo "Camino" compone los mensajes: puedeTransitar(vehiculo)
-      -El tipo "Estado" compone los mensajes: peso(), nivelPeligrosidad(), bultos(), cargar(), descargar()
+      -El tipo "Estado" compone los mensajes: peso(), nivelPeligrosidad(), bultos()
 
    - ¿Qué objetos son los emisores de los mensajes polimórficos?
       -Los objetos emisores:

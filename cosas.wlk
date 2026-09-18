@@ -105,11 +105,11 @@ object bateríaAntiaérea {
 	}
 
 	method cargarBateria() {
-	  estado = estado.cargar()
+	  estado = cargada
 	}
 
 	method descargarBateria() {
-	  estado = estado.descargar()
+	  estado = descargada
 	}
 
 	method efectoDeCarga() {
@@ -233,14 +233,6 @@ object cargada {
 	method bultos() {
 	  return 2
 	}
-
-	method cargar() {
-	  return self
-	}
-
-	method descargar() {
-	  return descargada
-	}
 }
 
 object descargada {
@@ -254,14 +246,6 @@ object descargada {
 
 	method bultos() {
 	  return 1
-	}
-
-	method cargar() {
-	  return cargada
-	}
-
-	method descargar() {
-	  return self
 	}
 }
 
