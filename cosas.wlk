@@ -1,6 +1,251 @@
 object knightRider {
 	method peso() { return 500 }
+	
 	method nivelPeligrosidad() { return 10 }
+	
+	method bultos() {
+	  return 1
+	}
+
+	method efectoDeCarga() {
+	  // no tiene efecto de carga
+	}
 }
 
+object arenaAGranel {
+	var peso = 0
+
+	method peso() {
+	  return peso
+	}
+
+	method peso(_peso) {
+	  peso = _peso
+	}
+
+	method nivelPeligrosidad() {
+	  return 1
+	}
+
+	method bultos() {
+	  return 1
+	}
+
+	method efectoDeCarga() {
+	  peso = peso + 20
+	}
+}
+
+object bumblebee {
+  var modo = auto
+  method peso() {
+	return 800
+  }
+
+  method nivelPeligrosidad() {
+	return modo.nivelPeligrosidad()
+  }
+
+  method transformar() {
+	modo = modo.transformar() //si esta en modo auto, pasa a robot y viceversa.
+  }
+
+  method bultos() {
+	  return 2
+  }
+
+	method efectoDeCarga() {
+	  self.transformar()
+  }
+
+	method modo() {
+	  return modo
+  }
+}
+
+object paqueteDeLadrillos {
+	var cantLadrillos = 0
+	method peso() {
+	  return cantLadrillos * 2 //por cada ladrillo, pesa 2kg
+	}
+
+	method nivelPeligrosidad() {
+	  return 2
+	}
+
+	method cantLadrillos(_cantLadrillos) {
+	  cantLadrillos = _cantLadrillos
+	}
+
+	method bultos() {
+	  if (cantLadrillos <= 100) return 1 else if (cantLadrillos <= 300) return 2 else return 3
+	}
+
+	method efectoDeCarga() {
+	  if (cantLadrillos < 12) cantLadrillos = 0 else cantLadrillos = cantLadrillos - 12
+	}
+
+	method cantLadrillos() {
+	  return cantLadrillos
+	}
+}
+
+object bateríaAntiaérea {
+	var estado = cargada
+	method peso() {
+	  return estado.peso() //si esta cargada, devuelve 300 de peso, en caso contrario 200 de peso
+	}
+
+	method nivelPeligrosidad() {
+	  return estado.nivelPeligrosidad() //si esta cargada, devuelve 100 de peligrosidad, en caso contrario 0
+	}
+
+	method bultos() {
+	  return estado.bultos()
+	}
+
+	method cargarBateria() {
+	  estado = cargada
+	}
+
+	method descargarBateria() {
+	  estado = descargada
+	}
+
+	method efectoDeCarga() {
+	  self.descargarBateria()
+	}
+
+	method estado() {
+	  return estado
+	}
+}
+
+object residuosRadiactivos {
+	var peso = 0
+	method peso() {
+	  return peso
+	}
+
+	method peso(_peso) {
+	  peso = _peso
+	}
+
+	method nivelPeligrosidad() {
+	  return 200
+	}
+
+	method bultos() {
+	  return 1
+	}
+
+	method efectoDeCarga() {
+	  peso = peso + 15
+	}
+}
+
+object contenedorPortuario {
+	const contenedor = #{}
+
+	method peso() {
+	  return 100 + self.pesoDeCosas()
+	}
+
+	method pesoDeCosas() {
+	  return contenedor.sum({unaCosa => unaCosa.peso()})
+	}
+
+	method nivelPeligrosidad() {
+	  if (self.hayCosas()) return self.cosaMasPeligrosa().nivelPeligrosidad() else return 0
+	}
+
+	method hayCosas() {
+	  return not contenedor.isEmpty()
+	}
+
+	method cosaMasPeligrosa() {
+	  return contenedor.max({unaCosa => unaCosa.nivelPeligrosidad()})// devuelve la cosa mas peligrosa
+	}
+
+	method agregarCosa(unaCosa) {
+	  contenedor.add(unaCosa)
+	}
+
+	method bultos() {
+	  return 1 + contenedor.sum({unaCosa => unaCosa.bultos()})
+	}
+
+	method efectoDeCarga() {
+	  contenedor.forEach({unaCosa => unaCosa.efectoDeCarga()})
+	}
+}
+
+object embalajeDeSeguridad {
+	var property embalado = arenaAGranel
+
+  method peso() {
+	return embalado.peso()
+  }
+
+  method nivelPeligrosidad() {
+	return embalado.nivelPeligrosidad() / 2
+  }
+
+  method bultos() {
+	  return 2
+	}
+
+	method efectoDeCarga() {
+	  // no tiene efecto de carga
+	}
+}
+
+object auto {
+	method nivelPeligrosidad() {
+	  return 15
+	}
+
+	method transformar() {
+	  return robot
+	}
+}
+
+object robot {
+	method nivelPeligrosidad() {
+	  return 30
+	}
+
+	method transformar() {
+	  return auto
+	}
+}
+
+object cargada {
+
+	method peso() {
+	  return 300
+	}
+
+	method nivelPeligrosidad() {
+	  return 100
+	}
+
+	method bultos() {
+	  return 2
+	}
+}
+
+object descargada {
+	method peso() {
+	  return 200
+	}
+
+	method nivelPeligrosidad() {
+	  return 0
+	}
+
+	method bultos() {
+	  return 1
+	}
+}
 
